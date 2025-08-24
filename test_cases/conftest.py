@@ -1,5 +1,5 @@
 import pytest
-from ..apis.login_api import LoginAPI
+from ..apis.user_api import LoginAPI
 
 @pytest.fixture(scope="session")
 def base_url(settings):

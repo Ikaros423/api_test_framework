@@ -1,4 +1,4 @@
-from ..apis.login_api import LoginAPI
+from ..apis.user_api import LoginAPI
 import pytest
 
 def test_login_success(login_api):

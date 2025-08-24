@@ -1,9 +1,9 @@
 import httpx
 from .base_api import BaseAPI
 
-class LoginAPI(BaseAPI):
+class UserAPI(BaseAPI):
     """
-    登录相关的API封装
+    用户相关的API封装
     """
     def login(self, accounts: str, pwd: str, type: str) -> 'httpx.Response':
         """登录
