@@ -1,10 +1,9 @@
 import pytest
-from ..common.read_config import get_base_url
 from ..apis.login_api import LoginAPI
 
 @pytest.fixture(scope="session")
-def base_url():
-    return get_base_url()
+def base_url(settings):
+    return settings.get('base_url')
 
 @pytest.fixture(scope="session")
 def login_api(base_url, token = None):
