@@ -1,4 +1,5 @@
 import pytest
+import httpx
 from ..apis.user_api import UserAPI
 from ..apis.cart_api import CartAPI
 
@@ -7,7 +8,12 @@ def base_url(settings):
     return settings.get('base_url')
 
 @pytest.fixture(scope="session")
-def user_api(base_url):
+def httpx_client(base_url):
+    with httpx.Client(base_url=base_url) as client:
+        yield client
+
+@pytest.fixture(scope="session")
+def user_api(httpx_client) -> UserAPI:
     """创建UserAPI实例
 
     Args:
@@ -16,9 +22,8 @@ def user_api(base_url):
     Yields:
         api_instanse: UserAPI实例
     """
-    api_instanse = UserAPI(base_url)
-    yield api_instanse
-    api_instanse.close()
+    api_instanse = UserAPI(httpx_client)
+    return api_instanse
     
 @pytest.fixture(scope="session")
 def logged_in_user_api(settings, user_api) -> UserAPI:
@@ -37,15 +42,13 @@ def logged_in_user_api(settings, user_api) -> UserAPI:
     return user_api
 
 @pytest.fixture(scope="session")
-def cart_api(base_url, logged_in_user_api):
+def cart_api(httpx_client, logged_in_user_api) -> CartAPI:
     """创建CartAPI实例,使用以登录的session
 
     Args:
         base_url (_type_): _description_
         logged_in_user_api (_type_): 获取以登录的session
     """
-    # 创建CartAPI实例, 并将以登录的session传递给它
-    cart_instance = CartAPI(base_url)
-    cart_instance.session = logged_in_user_api.session
-    yield cart_instance
-    cart_instance.close()
+    # 创建CartAPI实例
+    cart_instance = CartAPI(httpx_client)
+    return cart_instance
