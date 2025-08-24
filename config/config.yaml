@@ -1,1 +1,6 @@
 base_url: "http://101.35.24.188"
+
+test_account: 
+  account: "123456"
+  pwd: "10446949"
+  type: "username"
