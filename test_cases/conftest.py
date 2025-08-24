@@ -6,7 +6,7 @@ def base_url(settings):
     return settings.get('base_url')
 
 @pytest.fixture(scope="session")
-def login_api(base_url, token = None):
+def login_api(base_url):
     """创建LoginAPI实例
 
     Args:
@@ -16,6 +16,6 @@ def login_api(base_url, token = None):
     Yields:
         api_instanse: LoginAPI实例
     """
-    api_instanse = LoginAPI(base_url, token)
+    api_instanse = LoginAPI(base_url)
     yield api_instanse
     api_instanse.close()

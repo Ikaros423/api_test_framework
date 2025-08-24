@@ -2,7 +2,7 @@ import httpx
 # from common.logger import logger # 假设你有一个日志模块
 
 class BaseAPI:
-    def __init__(self, base_url: str, token: str = None):
+    def __init__(self, base_url: str):
         """初始化BaseAPI
 
         Args:
@@ -11,8 +11,6 @@ class BaseAPI:
         """
         self.base_url = base_url
         self.session = httpx.Client() # 使用Client可以保持会话和cookies
-        if token:
-            self.session.headers['Authorization'] = f'Bearer {token}'
 
     def request(self, method: str, url: str, **kwargs) -> httpx.Response:
         """封装一个通用的请求方法
