@@ -22,5 +22,5 @@ class UserAPI(BaseAPI):
                            "pwd": pwd,
                            "type": type
                            }
-        return self.request('POST', url, params=url_params, data=login_form_data)
+        return self._request('POST', url, params=url_params, data=login_form_data)
         

@@ -12,7 +12,7 @@ class BaseAPI:
         self.base_url = base_url
         self.session = httpx.Client() # 使用Client可以保持会话和cookies
 
-    def request(self, method: str, url: str, **kwargs) -> httpx.Response:
+    def _request(self, method: str, url: str, **kwargs) -> httpx.Response:
         """封装一个通用的请求方法
 
         Args:
