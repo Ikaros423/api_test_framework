@@ -1,5 +1,8 @@
 import httpx
-# from common.logger import logger # 假设你有一个日志模块
+import logging
+
+# 获取当前模块名命名的log实例
+log = logging.getLogger(__name__)
 
 class BaseAPI:
     def __init__(self, session: httpx.Client):
@@ -20,18 +23,18 @@ class BaseAPI:
         Returns:
             httpx.Response: httpx.Response 对象
         """
-        # logger.info(f"发起请求: {method} {full_url}")
-        # logger.info(f"请求参数: {kwargs}")
+        log.info(f"发起请求: {method} {url}")
+        log.debug(f"请求参数: {kwargs}")
         
         try:
             response = self.session.request(method, url, **kwargs)
             response.raise_for_status() # 如果是4xx或5xx状态码，则抛出异常
-            # logger.info(f"响应状态码: {response.status_code}")
-            # logger.info(f"响应内容: {response.text[:500]}...") # 只记录部分响应
+            log.info(f"响应状态码: {response.status_code}")
+            log.debug(f"响应内容: {response.text[:500]}...") # 只记录部分响应
             return response
         except httpx.HTTPStatusError as e:
-            # logger.error(f"请求失败: {e.response.status_code} - {e.response.text}")
+            log.error(f"请求失败: {e.response.status_code} - {e.response.text}")
             raise # 重新抛出异常，让pytest能捕获到失败
         except Exception as e:
-            # logger.error(f"发生未知错误: {e}")
+            log.error(f"发生未知错误: {e}")
             raise

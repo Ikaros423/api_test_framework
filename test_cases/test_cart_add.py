@@ -1,12 +1,15 @@
 import pytest
-from ..apis.cart_api import CartAPI
+import logging
 from ..common.assertion import Assert
 from ..common.file_handler import load_json_schema
 from ..common.file_handler import load_yaml_data
 
+log = logging.getLogger(__name__)
+
 @pytest.mark.parametrize("case_data", load_yaml_data("cart/cart_cases.yaml"))
 def test_cart_add(cart_api, case_data):
     test_name = case_data.get("test_name")
+    log.info(f"[{test_name}] 测试开始")
     request_info = case_data.get("request")
     validation_info = case_data.get("validate")
 
@@ -34,3 +37,4 @@ def test_cart_add(cart_api, case_data):
                 schema_data = load_json_schema(schema_path)
                 asserter.validate_with_schema(schema_data)
     
+    log.info(f"[{test_name}] 测试结束")
