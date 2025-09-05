@@ -1,32 +1,38 @@
 from ..apis.user_api import UserAPI
+from ..common.file_handler import load_yaml_data
+from ..common.file_handler import load_json_schema
+from ..common.assertion import Assert
 import pytest
 
-def test_login_success(user_api):
-    accounts = '123456'
-    pwd = '10446949'
-    type = 'username'
-    response = user_api.login(accounts, pwd, type)
-    assert response.status_code == 200
-    response_data = response.json()
-    assert response_data['msg'] == '登录成功'
-    assert response_data['code'] == 0
+@pytest.mark.parametrize("case_data", load_yaml_data("user/login_cases.yaml"))
+def test_user_login(user_api, case_data):
+    test_name = case_data.get("test_name")
+    request_info = case_data.get("request")
+    validation_info = case_data.get("validate")
 
-def test_login_error_password(user_api):
-    accounts = '123456'
-    pwd = '1044694'
-    type = 'username'
+    data = request_info.get("data", {})
+    accounts = data.get("accounts")
+    pwd = data.get("pwd")
+    type = data.get("type")
+    
     response = user_api.login(accounts, pwd, type)
-    assert response.status_code == 200
-    response_data = response.json()
-    assert response_data['msg'] == '密码错误'
-    assert response_data['code'] == -4
-
-def test_login_error_account(user_api):
-    accounts = '12345'
-    pwd = '1044694'
-    type = 'username'
-    response = user_api.login(accounts, pwd, type)
-    assert response.status_code == 200
-    response_data = response.json()
-    assert response_data['msg'] == '帐号不存在'
-    assert response_data['code'] == -3
+    
+    # 初始化断言对象
+    asserter = Assert(response)
+    
+    if validation_info:
+        for validation_rule in validation_info:
+            validation_type = validation_rule.get("type")
+            expected = validation_rule.get("expected")
+            
+            if validation_type == "status_code":
+                asserter.stauts_code_is(expected)
+                
+            elif validation_type == "json_path":
+                path = validation_rule.get("path")
+                asserter.json_path_value_is(path, expected)
+                
+            elif validation_type == "schema":
+                schema_path = validation_rule.get("path")
+                schema_data = load_json_schema(schema_path)
+                asserter.validate_with_schema(schema_data)

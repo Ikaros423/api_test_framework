@@ -1,0 +1,13 @@
+{
+    "type": "object",
+    "properties": {
+        "code": {
+            "type": "integer",
+            "enum": [0]
+        },
+        "msg": {
+            "type": "string"
+        }
+    },
+    "required": ["code", "msg", "data"]
+}

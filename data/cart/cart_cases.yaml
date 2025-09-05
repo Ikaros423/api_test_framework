@@ -1,0 +1,29 @@
+- test_name: "购物车添加成功"
+  request:
+    data:
+      goods_data: "W3siZ29vZHNfaWQiOjYsInN0b2NrIjoxLCJzcGVjIjpbXX1d"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "加入成功"
+      - type: schema
+        path: "cart/add_cart.json"
+
+- test_name: "购物车添加失败(参数错误)"
+  request:
+    data:
+      goods_data: "W3siZ29vZHNfaWQiOjY"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -1
+      - type: json_path
+        path: "$.msg"
+        expected: "参数错误"

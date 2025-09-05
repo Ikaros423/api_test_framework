@@ -1,20 +1,36 @@
 import pytest
 from ..apis.cart_api import CartAPI
+from ..common.assertion import Assert
+from ..common.file_handler import load_json_schema
+from ..common.file_handler import load_yaml_data
 
-def test_cart_add_successfully(cart_api):
-    goods_data = "W3siZ29vZHNfaWQiOjYsInN0b2NrIjoxLCJzcGVjIjpbXX1d"
+@pytest.mark.parametrize("case_data", load_yaml_data("cart/cart_cases.yaml"))
+def test_cart_add(cart_api, case_data):
+    test_name = case_data.get("test_name")
+    request_info = case_data.get("request")
+    validation_info = case_data.get("validate")
+
+    data = request_info.get("data", {})
+    goods_data = data.get("goods_data")
     response = cart_api.add(goods_data)
-    assert response.status_code == 200
-    response_data = response.json()
-
-    assert response_data['msg'] == '加入成功'
-    assert response_data['code'] == 0
-
-def test_cart_add_failed(cart_api):
-    goods_data = "W3siZ29vZHNfaWQi"
-    response = cart_api.add(goods_data)
-    assert response.status_code == 200
-    response_data = response.json()
-
-    assert response_data['msg'] == '参数错误'
-    assert response_data['code'] == -1
+    
+    # 初始化断言对象
+    asserter = Assert(response)
+    
+    if validation_info:
+        for validation_rule in validation_info:
+            validation_type = validation_rule.get("type")
+            expected = validation_rule.get("expected")
+            
+            if validation_type == "status_code":
+                asserter.stauts_code_is(expected)
+                
+            elif validation_type == "json_path":
+                path = validation_rule.get("path")
+                asserter.json_path_value_is(path, expected)
+                
+            elif validation_type == "schema":
+                schema_path = validation_rule.get("path")
+                schema_data = load_json_schema(schema_path)
+                asserter.validate_with_schema(schema_data)
+    

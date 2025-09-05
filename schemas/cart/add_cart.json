@@ -1,0 +1,25 @@
+{
+    "type": "object",
+    "properties": {
+        "code": {
+            "type": "integer",
+            "enum": [0]
+        },
+        "msg": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+            "properties": {
+                "total_price": {
+                    "type": "string"
+                },
+                "buy_number": {
+                    "type": "string"
+                }
+            },
+            "required": ["total_price", "buy_number"]
+        }
+    },
+    "required": ["code", "msg", "data"]
+}
