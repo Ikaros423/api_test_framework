@@ -1,4 +1,4 @@
-base_url: "http://localhost:80"
+base_url: "http://101.35.24.188"
 
 test_account: 
   account: "123456"

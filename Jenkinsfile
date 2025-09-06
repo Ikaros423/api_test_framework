@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Setup Environment') {
+            steps {
+                script {
+                    sh 'python3 -m pip install uv'
+                    sh 'uv sync'
+                }
+            }
+        }
+        
+        stage('Run API Tests') {
+            steps {
+                sh 'uvx pytest --alluredir=allure-results'
+            }
+        }
+    }
+    
+    post {
+        always {
+            junit 'reports/report.xml'
+
+            allure([
+                includeProperties: false,
+                reportBuildPolicy: 'ALWAYS',
+                results: [[path: 'allure-results']]
+            ])
+            
+            cleanWs()
+        }
+    }
+}
