@@ -11,15 +11,15 @@ pipeline {
         stage('Setup Environment') {
             steps {
                 script {
-                    bat 'py -m pip install uv'
-                    bat 'uv sync'
+                    bat 'python -m pip install uv'
+                    bat 'python -m uv sync'
                 }
             }
         }
         
         stage('Run API Tests') {
             steps {
-                bat 'uvx pytest --junitxml=reports/report.xml --alluredir=allure-results'
+                bat 'python -m uv run pytest --junitxml=reports/report.xml --alluredir=allure-results'
             }
         }
     }
