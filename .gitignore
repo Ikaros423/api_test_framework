@@ -5,6 +5,7 @@ build/
 dist/
 logs/
 wheels/
+allure-results/
 *.egg-info
 .pytest_cache/
 
