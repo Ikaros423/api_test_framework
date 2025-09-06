@@ -19,7 +19,7 @@ pipeline {
         
         stage('Run API Tests') {
             steps {
-                sh 'uvx pytest --alluredir=allure-results'
+                sh 'uvx pytest --junitxml=reports/report.xml --alluredir=allure-results'
             }
         }
     }
