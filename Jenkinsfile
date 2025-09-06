@@ -11,7 +11,7 @@ pipeline {
         stage('Setup Environment') {
             steps {
                 script {
-                    bat 'python3 -m pip install uv'
+                    bat 'python -m pip install uv'
                     bat 'uv sync'
                 }
             }
