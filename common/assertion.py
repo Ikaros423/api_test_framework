@@ -16,7 +16,7 @@ class Assert:
         except Exception:
             self.json_data = None
             
-    def stauts_code_is(self, expected_code: int):
+    def status_code_is(self, expected_code: int):
         """断言HTTP状态码
 
         Args:
@@ -37,7 +37,7 @@ class Assert:
             f"文本内容校验失败! 未找到预期文本: '{expected_text}'"
         return self         
     
-    def json_path_exits(self, json_path: str):
+    def json_path_exists(self, json_path: str):
         """断言响应JSON中, 存在json_path表达式匹配的结果
 
         Args:

@@ -26,7 +26,7 @@ def test_cart_add(cart_api, case_data):
             expected = validation_rule.get("expected")
             
             if validation_type == "status_code":
-                asserter.stauts_code_is(expected)
+                asserter.status_code_is(expected)
                 
             elif validation_type == "json_path":
                 path = validation_rule.get("path")
