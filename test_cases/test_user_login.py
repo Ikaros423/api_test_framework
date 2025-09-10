@@ -1,17 +1,21 @@
 from ..common.file_handler import load_yaml_data
 from ..common.file_handler import load_json_schema
 from ..common.assertion import Assert
+from ..common.variable_handler import VariableHandler
 import pytest
 import logging
 
 log = logging.getLogger(__name__)
 
 @pytest.mark.parametrize("case_data", load_yaml_data("user/login_cases.yaml"))
-def test_user_login(user_api, case_data):
+def test_user_login(user_api, case_data, variable_pool):
     test_name = case_data.get("test_name")
     log.info(f"[{test_name}] 测试开始")
     request_info = case_data.get("request")
+    extract_info = case_data.get("extract")
     validation_info = case_data.get("validate")
+
+    VariableHandler.substitute_variables(request_info, variable_pool)
 
     data = request_info.get("data", {})
     accounts = data.get("accounts")
@@ -39,5 +43,7 @@ def test_user_login(user_api, case_data):
                 schema_path = validation_rule.get("path")
                 schema_data = load_json_schema(schema_path)
                 asserter.validate_with_schema(schema_data)
+                
+    VariableHandler.extract_variables(response.json(), extract_info, variable_pool)
                 
     log.info(f"[{test_name}] 测试结束")

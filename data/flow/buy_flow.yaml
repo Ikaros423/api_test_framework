@@ -1,0 +1,24 @@
+- test_step: "用户登录并提取关键信息"
+  api_method: "login"
+  request_data:
+    accounts: "123456"
+    pwd: "10446949"
+    type: "username"
+  extract:
+    - var_name: "message"
+      json_path: "$.msg" # 假设返回cookie
+  validate:
+    - type: json_path
+      path: "$.msg"
+      expected: "登录成功"
+
+- test_step: "添加商品到购物车"
+  api_method: "add_to_cart"
+  request_data:
+    goods_data: "${message}" # 使用上一步提取的变量
+  validate:
+    - type: status_code
+      expected: 200
+    - type: json_path
+      path: "$.msg"
+      expected: "参数错误"

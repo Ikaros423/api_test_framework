@@ -17,7 +17,7 @@
 - test_name: "购物车添加失败(参数错误)"
   request:
     data:
-      goods_data: "W3siZ29vZHNfaWQiOjY"
+      goods_data: "${message}"
   validate:
       - type: status_code
         expected: 200

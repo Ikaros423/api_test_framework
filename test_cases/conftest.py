@@ -13,6 +13,14 @@ def httpx_client(base_url):
         yield client
 
 @pytest.fixture(scope="session")
+def variable_pool():
+    """
+    创建一个在整个测试会话期间共享的字典，用于存储和传递变量。
+    scope="session" 确保所有测试用例都使用这同一个字典。
+    """
+    return {}
+
+@pytest.fixture(scope="session")
 def user_api(httpx_client) -> UserAPI:
     """创建UserAPI实例
 
