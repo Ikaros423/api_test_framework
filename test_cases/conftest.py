@@ -1,3 +1,4 @@
+import pytest_asyncio
 import pytest
 import httpx
 from ..apis.user_api import UserAPI
@@ -7,11 +8,11 @@ from ..apis.cart_api import CartAPI
 def base_url(settings):
     return settings.get('base_url')
 
-@pytest.fixture(scope="session")
-def httpx_client(base_url):
-    with httpx.Client(base_url=base_url) as client:
-        yield client
-
+# @pytest_asyncio.fixture(scope="function")
+# async def httpx_client(base_url):
+#     async with httpx.AsyncClient(base_url=base_url) as client:
+#         yield client
+        
 @pytest.fixture(scope="session")
 def variable_pool():
     """
@@ -20,8 +21,8 @@ def variable_pool():
     """
     return {}
 
-@pytest.fixture(scope="session")
-def user_api(httpx_client) -> UserAPI:
+@pytest_asyncio.fixture(scope="session")
+async def user_api(httpx_client) -> UserAPI:
     """创建UserAPI实例
 
     Args:
@@ -32,9 +33,9 @@ def user_api(httpx_client) -> UserAPI:
     """
     api_instanse = UserAPI(httpx_client)
     return api_instanse
-    
-@pytest.fixture(scope="session")
-def logged_in_user_api(settings, user_api) -> UserAPI:
+
+@pytest_asyncio.fixture(scope="session")
+async def logged_in_user_api(settings, user_api) -> UserAPI:
     """创建一个登录状态的session
 
     Args:
@@ -42,15 +43,15 @@ def logged_in_user_api(settings, user_api) -> UserAPI:
     """
     login_data = settings.get("test_account")
     # 使用user_api执行登录操作
-    response = user_api.login(login_data['account'], login_data['pwd'], login_data['type'])
+    response = await user_api.login(login_data['account'], login_data['pwd'], login_data['type'])
     
     assert response.status_code == 200
     
     # 返回该实例
     return user_api
 
-@pytest.fixture(scope="session")
-def cart_api(httpx_client, logged_in_user_api) -> CartAPI:
+@pytest_asyncio.fixture(scope="session")
+async def cart_api(httpx_client, logged_in_user_api) -> CartAPI:
     """创建CartAPI实例,使用以登录的session
 
     Args:

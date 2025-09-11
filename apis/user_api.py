@@ -5,7 +5,7 @@ class UserAPI(BaseAPI):
     """
     用户相关的API封装
     """
-    def login(self, accounts: str, pwd: str, type: str) -> 'httpx.Response':
+    async def login(self, accounts: str, pwd: str, type: str, test_name: str) -> 'httpx.Response':
         """登录
 
         Args:
@@ -22,5 +22,4 @@ class UserAPI(BaseAPI):
                            "pwd": pwd,
                            "type": type
                            }
-        return self._request('POST', url, params=url_params, data=login_form_data)
-        
+        return await self._request('POST', url, params=url_params, data=login_form_data, test_name=test_name)

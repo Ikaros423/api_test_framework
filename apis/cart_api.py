@@ -6,7 +6,7 @@ class CartAPI(BaseAPI):
     购物车相关API封装
     """
     
-    def add(self, goods_data: str) -> httpx.Response:
+    async def add(self, goods_data: str, test_name: str) -> httpx.Response:
         """加入购物车
 
         Args:
@@ -18,4 +18,4 @@ class CartAPI(BaseAPI):
         url = ''
         url_params = {"s": "cart/save"}
         data_params = {"goods_data": goods_data}
-        return self._request("POST", url, params=url_params, data=data_params)
+        return await self._request("POST", url, params=url_params, data=data_params, test_name=test_name)

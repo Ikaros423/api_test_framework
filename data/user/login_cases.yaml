@@ -4,9 +4,6 @@
       accounts: "123456"
       pwd: "10446949"
       type: "username"
-  extract:
-    - var_name: "message"
-      json_path: "$.msg"
   validate:
       - type: status_code
         expected: 200
