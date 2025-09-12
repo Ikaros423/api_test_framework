@@ -10,8 +10,7 @@ def base_url(settings):
 
 @pytest_asyncio.fixture(scope="session")
 async def httpx_client(base_url):
-    limit = httpx.Limits(max_connections=2, max_keepalive_connections=2)
-    async with httpx.AsyncClient(base_url=base_url, limits=limit) as client:
+    async with httpx.AsyncClient(base_url=base_url) as client:
         yield client
         
 @pytest.fixture(scope="session")
