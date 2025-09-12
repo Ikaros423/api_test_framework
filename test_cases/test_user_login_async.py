@@ -8,6 +8,9 @@ from ..apis.user_api import UserAPI
 
 log = logging.getLogger(__name__)
 
+# module-level lock，确保不会有多个协程同时进入 allure.step 导致嵌套
+_allure_step_lock = asyncio.Lock()
+
 # 我们需要一个未登录的 user_api 实例
 @pytest.fixture(scope="session")
 def guest_user_api(httpx_client) -> UserAPI:
@@ -27,37 +30,39 @@ async def test_all_login_scenarios_concurrently(guest_user_api):
     async def run_single_login_case(case_data):
         async with sem:
             test_name = case_data.get("test_name")
-            with allure.step(f"-----{test_name}-----"):
-                request_info = case_data.get("request", {})
-                validation_info = case_data.get("validate")
-                
-                data = request_info.get("data", {})
-                accounts = data.get("accounts")
-                pwd = data.get("pwd")
-                req_type = data.get("type")
+            request_info = case_data.get("request", {})
+            validation_info = case_data.get("validate")
+            
+            data = request_info.get("data", {})
+            accounts = data.get("accounts")
+            pwd = data.get("pwd")
+            req_type = data.get("type")
 
-                log.info(f"[{test_name}] 并发任务开始")
-                response = await guest_user_api.login(accounts, pwd, req_type, test_name)
+            log.info(f"[{test_name}] 并发任务开始")
+            response = await guest_user_api.login(accounts, pwd, req_type, test_name)
 
+            async with _allure_step_lock:
+                with allure.step(f"{test_name}"):
                 # 在协程内部直接进行断言
-                asserter = Assert(response)
-                if validation_info:
-                    for validation_rule in validation_info:
-                        validation_type = validation_rule.get("type")
-                        expected = validation_rule.get("expected")
-                        
-                        if validation_type == "status_code":
-                            asserter.status_code_is(expected)
+                    asserter = Assert(response)
+                    if validation_info:
+                        for validation_rule in validation_info:
+                            validation_type = validation_rule.get("type")
+                            expected = validation_rule.get("expected")
                             
-                        elif validation_type == "json_path":
-                            path = validation_rule.get("path")
-                            asserter.json_path_value_is(path, expected)
-                            
-                        elif validation_type == "schema":
-                            schema_path = validation_rule.get("path")
-                            schema_data = load_json_schema(schema_path)
-                            asserter.validate_with_schema(schema_data)
-                log.info(f"[{test_name}] 并发任务结束")
+                            if validation_type == "status_code":
+                                asserter.status_code_is(expected)
+                                
+                            elif validation_type == "json_path":
+                                path = validation_rule.get("path")
+                                asserter.json_path_value_is(path, expected)
+                                
+                            elif validation_type == "schema":
+                                schema_path = validation_rule.get("path")
+                                schema_data = load_json_schema(schema_path)
+                                asserter.validate_with_schema(schema_data)
+            
+            log.info(f"[{test_name}] 并发任务结束")
 
     # 2. 【扇出】创建所有任务
     tasks = [run_single_login_case(case) for case in all_cases]
