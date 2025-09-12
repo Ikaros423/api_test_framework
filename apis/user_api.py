@@ -5,7 +5,7 @@ class UserAPI(BaseAPI):
     """
     用户相关的API封装
     """
-    async def login(self, accounts: str, pwd: str, type: str, test_name: str) -> 'httpx.Response':
+    async def login(self, accounts: str, pwd: str, type: str, test_name: str = "N/A") -> 'httpx.Response':
         """登录
 
         Args:

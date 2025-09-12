@@ -6,7 +6,7 @@ class CartAPI(BaseAPI):
     购物车相关API封装
     """
     
-    async def add(self, goods_data: str, test_name: str) -> httpx.Response:
+    async def add(self, goods_data: str, test_name: str = "N/A") -> httpx.Response:
         """加入购物车
 
         Args:

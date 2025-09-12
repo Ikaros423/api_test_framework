@@ -8,10 +8,11 @@ from ..apis.cart_api import CartAPI
 def base_url(settings):
     return settings.get('base_url')
 
-# @pytest_asyncio.fixture(scope="function")
-# async def httpx_client(base_url):
-#     async with httpx.AsyncClient(base_url=base_url) as client:
-#         yield client
+@pytest_asyncio.fixture(scope="session")
+async def httpx_client(base_url):
+    limit = httpx.Limits(max_connections=2, max_keepalive_connections=2)
+    async with httpx.AsyncClient(base_url=base_url, limits=limit) as client:
+        yield client
         
 @pytest.fixture(scope="session")
 def variable_pool():

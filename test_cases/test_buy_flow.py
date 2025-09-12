@@ -8,7 +8,8 @@ from ..common.assertion import Assert
 log = logging.getLogger(__name__)
 
 # 整个流程只运行一次，所以不需要parametrize
-def test_buy_product_workflow(user_api, cart_api, variable_pool):
+@pytest.mark.asyncio(scope="session")
+async def test_buy_product_workflow(user_api, cart_api, variable_pool):
     flow_steps = load_yaml_data("flow/buy_flow.yaml")
 
     for step in flow_steps:
@@ -23,9 +24,9 @@ def test_buy_product_workflow(user_api, cart_api, variable_pool):
         VariableHandler.substitute_variables(data, variable_pool)
         # 2. 根据api_method选择使用user_api还是cart_api
         if api == 'login':
-            response = user_api.login(data.get('accounts'), data.get('pwd'), data.get('type'))
+            response = await user_api.login(data.get('accounts'), data.get('pwd'), data.get('type'))
         elif api == 'add_to_cart':
-            response = cart_api.add(data.get('goods_data'))
+            response = await cart_api.add(data.get('goods_data'))
         # 3. 发送请求
         # 4. 提取变量
         VariableHandler.extract_variables(response.json(), extract_info, variable_pool)

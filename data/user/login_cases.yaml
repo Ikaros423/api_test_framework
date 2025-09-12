@@ -1,4 +1,4 @@
-- test_name: "用户登录成功"
+- test_name: "1用户登录成功"
   request:
     data:
       accounts: "123456"
@@ -16,7 +16,7 @@
       - type: schema
         path: "user/login_response_success.json"
         
-- test_name: "登录失败(密码错误)"
+- test_name: "2登录失败(密码错误)"
   request:
     data:
       accounts: "123456"
@@ -32,7 +32,1557 @@
         path: "$.msg"
         expected: "密码错误"
 
-- test_name: "登录失败(账号不存在)"
+- test_name: "3登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "4用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "5登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "6登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "7用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "8登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "9登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "10用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "11登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "12登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "13用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "14登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "15登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "16用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "17登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "18登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "19用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "20登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "21登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "22用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "23登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "24登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "25用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "26登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "27登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "28用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "29登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "30登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "31用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "32登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "33登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "34用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "35登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "36登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "37用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "38登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "39登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "40用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "41登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "42登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "43用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "44登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "45登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "46用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "47登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "48登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "49用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "50登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "51登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "52用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "53登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "54登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "55用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "56登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "57登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "58用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "59登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "60登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "61用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "62登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "63登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "64用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "65登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "66登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "67用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "68登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "69登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "70用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "71登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "72登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "73用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "74登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "75登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "76用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "77登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "78登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "79用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "80登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "81登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "82用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "83登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "84登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "85用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "86登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "87登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "88用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "89登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "90登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "91用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "92登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "93登录失败(账号不存在)"
+  request:
+    data:
+      accounts: "123456789"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -3
+      - type: json_path
+        path: "$.msg"
+        expected: "帐号不存在"
+
+- test_name: "94用户登录成功"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: 0
+      - type: json_path
+        path: "$.msg"
+        expected: "登录成功"
+      - type: schema
+        path: "user/login_response_success.json"
+        
+- test_name: "95登录失败(密码错误)"
+  request:
+    data:
+      accounts: "123456"
+      pwd: "10446949000"
+      type: "username"
+  validate:
+      - type: status_code
+        expected: 200
+      - type: json_path
+        path: "$.code"
+        expected: -4
+      - type: json_path
+        path: "$.msg"
+        expected: "密码错误"
+
+- test_name: "96登录失败(账号不存在)"
   request:
     data:
       accounts: "123456789"
