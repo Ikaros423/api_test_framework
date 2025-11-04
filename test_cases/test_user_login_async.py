@@ -11,7 +11,7 @@ log = logging.getLogger(__name__)
 # module-level lock，确保不会有多个协程同时进入 allure.step 导致嵌套
 _allure_step_lock = asyncio.Lock()
 
-# 我们需要一个未登录的 user_api 实例
+# 一个未登录的 user_api 实例
 @pytest.fixture(scope="session")
 def guest_user_api(httpx_client) -> UserAPI:
     return UserAPI(httpx_client)
@@ -24,7 +24,7 @@ async def test_all_login_scenarios_concurrently(guest_user_api):
     # 1. 加载所有测试用例数据
     all_cases = load_yaml_data("user/login_cases.yaml")
     
-    sem = asyncio.Semaphore(2)
+    sem = asyncio.Semaphore(5)
 
     # 封装每个并发任务的协程
     async def run_single_login_case(case_data):

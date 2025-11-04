@@ -10,7 +10,7 @@ def base_url(settings):
 
 @pytest_asyncio.fixture(scope="session")
 async def httpx_client(base_url):
-    async with httpx.AsyncClient(base_url=base_url) as client:
+    async with httpx.AsyncClient(base_url=base_url, http2=True) as client:
         yield client
         
 @pytest.fixture(scope="session")
